@@ -135,7 +135,7 @@ export default [
       'no-debugger': ERROR,
 
       // Add restricted globals from eslint-config-react-app
-      'no-restricted-globals': [ERROR].concat(restrictedGlobals),
+      'no-restricted-globals': [ERROR, ...restrictedGlobals],
 
       'no-unused-expressions': ERROR,
 
@@ -213,7 +213,7 @@ export default [
 
         ecmaVersion: 2020,
 
-        project: ['./tsconfig.json', 'tsconfig.app.json', 'tsconfig.node.json'],
+        project: ['./tsconfig.json'],
 
         sourceType: 'module',
 
