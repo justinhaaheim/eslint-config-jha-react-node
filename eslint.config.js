@@ -212,11 +212,12 @@ export default [
 
         ecmaVersion: 2020,
 
-        // project: ['./tsconfig.json'],
+        // See: https://typescript-eslint.io/blog/announcing-typescript-eslint-v8-beta/#project-service
+        projectService: true,
 
         sourceType: 'module',
 
-        // tsconfigRootDir: __dirname,
+        tsconfigRootDir: import.meta.dirname,
         warnOnUnsupportedTypeScriptVersion: true, // From eslint-config-react-app
       },
     },
