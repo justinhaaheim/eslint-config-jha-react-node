@@ -1,6 +1,6 @@
 # eslint-config-jha-react-node
 
-A comprehensive ESLint configuration for React and Node.js projects with TypeScript support. This configuration includes best practices for React development, TypeScript, and modern JavaScript features.
+My eslint flat config for React and Node.js projects with Typescript.
 
 ## Features
 
@@ -17,13 +17,13 @@ A comprehensive ESLint configuration for React and Node.js projects with TypeScr
 
 ```bash
 # Using npm
-npm install --save-dev eslint-config-jha-react-node eslint typescript
+npm install --save-dev eslint-config-jha-react-node
 
 # Using yarn
-yarn add --dev eslint-config-jha-react-node eslint typescript
+yarn add --dev eslint-config-jha-react-node
 
 # Using pnpm
-pnpm add --save-dev eslint-config-jha-react-node eslint typescript
+pnpm add --save-dev eslint-config-jha-react-node
 ```
 
 ## Usage
@@ -54,26 +54,6 @@ export default [
 ];
 ```
 
-## Requirements
-
-- Node.js >= 20.x
-- npm >= 9
-- ESLint 9.x
-- TypeScript 5.x
-
-## What's Included
-
-This configuration includes rules and plugins for:
-
-- React and React Hooks
-- TypeScript
-- Import sorting and organization
-- JSX accessibility
-- Prettier integration
-- Modern JavaScript features
-- Key sorting
-- And more!
-
 ## License
 
 MIT
@@ -81,22 +61,6 @@ MIT
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
-
-## ESLint Configuration
-
-This project uses ESLint's new flat config format. The configuration is in `eslint.config.js` at the root of the project.
-
-To run the linter:
-
-```bash
-npm run lint
-```
-
-To automatically fix issues:
-
-```bash
-npm run lint:fix
-```
 
 ## ESLint Testing
 
@@ -116,7 +80,3 @@ npm run test:lint
 ```
 
 For more information about the ESLint tests, see the [test/README.md](test/README.md) file.
-
-## TypeScript Configuration
-
-This project uses TypeScript for type checking. The configuration is in `tsconfig.json` at the root of the project
