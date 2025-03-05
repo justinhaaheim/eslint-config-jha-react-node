@@ -1,6 +1,5 @@
 // ESLint Flat Config
 import js from '@eslint/js';
-// Add confusing browser globals (used by eslint-config-react-app)
 import restrictedGlobals from 'confusing-browser-globals';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
@@ -12,8 +11,8 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import sortKeysFix from 'eslint-plugin-sort-keys-fix';
 import typescriptSortKeys from 'eslint-plugin-typescript-sort-keys';
 import globals from 'globals';
-import path from 'node:path';
-import {fileURLToPath} from 'node:url';
+// import path from 'node:path';
+// import {fileURLToPath} from 'node:url';
 import tseslint from 'typescript-eslint';
 
 // Constants for rule severity
@@ -27,8 +26,8 @@ const NO_UNUSED_VARS_CONFIG = [
 ];
 
 // Handle __dirname in ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 // Base configuration for all files
 export default [
@@ -213,11 +212,11 @@ export default [
 
         ecmaVersion: 2020,
 
-        project: ['./tsconfig.json'],
+        // project: ['./tsconfig.json'],
 
         sourceType: 'module',
 
-        tsconfigRootDir: __dirname,
+        // tsconfigRootDir: __dirname,
         warnOnUnsupportedTypeScriptVersion: true, // From eslint-config-react-app
       },
     },
