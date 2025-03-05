@@ -22,11 +22,10 @@
       "source.fixAll.format"
     ]
   },
-  // "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.tsdk": "node_modules/typescript/lib",
   "search.exclude": {
     "**/.yarn": true
   }
-  // "typescript.tsdk": "node_modules/typescript/lib",
   // "eslint.debug": true,
   // "eslint.trace.server": "verbose",
   // "eslint.validate": [

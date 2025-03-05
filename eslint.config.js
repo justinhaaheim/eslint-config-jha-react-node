@@ -1,3 +1,4 @@
+// @ts-check
 // ESLint Flat Config
 import js from '@eslint/js';
 import restrictedGlobals from 'confusing-browser-globals';
@@ -20,6 +21,7 @@ const OFF = 0;
 const WARN = 1;
 const ERROR = 2;
 
+// Modified to fit TypeScript-ESLint's expected rule format
 const NO_UNUSED_VARS_CONFIG = [
   WARN,
   {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
@@ -29,8 +31,8 @@ const NO_UNUSED_VARS_CONFIG = [
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
-// Base configuration for all files
-export default [
+// Base configuration for all finples
+export default tseslint.config(
   // Apply base JS recommended rules
   js.configs.recommended,
 
@@ -138,6 +140,7 @@ export default [
 
       'no-unused-expressions': ERROR,
 
+      // @ts-expect-error No idea why this is complaining
       'no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
       'no-var': ERROR,
@@ -217,6 +220,7 @@ export default [
 
         sourceType: 'module',
 
+        // @ts-expect-error No idea why it's saying TS2339: Property 'dirname' does not exist on type 'ImportMeta'.
         tsconfigRootDir: import.meta.dirname,
         warnOnUnsupportedTypeScriptVersion: true, // From eslint-config-react-app
       },
@@ -263,6 +267,7 @@ export default [
         },
       ],
 
+      // Modified to match TypeScript-ESLint's expected format
       '@typescript-eslint/no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
       // From eslint-config-react-app
@@ -370,4 +375,4 @@ export default [
       'react/style-prop-object': WARN, // From eslint-config-react-app
     },
   },
-];
+);
