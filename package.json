@@ -1,8 +1,14 @@
 {
   "name": "eslint-config-jha-react-node",
-  "private": true,
+  "private": false,
   "version": "0.0.1",
+  "description": "A comprehensive ESLint configuration for React and Node.js projects with TypeScript support",
   "type": "module",
+  "main": "eslint.config.js",
+  "files": [
+    "eslint.config.js",
+    "README.md"
+  ],
   "engines": {
     "npm": ">=9",
     "node": ">=20.x"
@@ -23,11 +29,11 @@
     "ts-check": "tsc --build",
     "prepare": "husky"
   },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+  "peerDependencies": {
+    "eslint": "^9.21.0",
+    "typescript": "^5.0.0"
   },
-  "devDependencies": {
+  "dependencies": {
     "@eslint/js": "^9.8.0",
     "@types/confusing-browser-globals": "^1.0.3",
     "@types/eslint-config-prettier": "^6.11.3",
@@ -39,7 +45,6 @@
     "@vitejs/plugin-react": "^4.3.1",
     "concurrently": "8.2.1",
     "confusing-browser-globals": "^1.0.11",
-    "eslint": "^9.21.0",
     "eslint-config-prettier": "10.0.2",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "2.31.0",
@@ -53,6 +58,10 @@
     "eslint-plugin-testing-library": "^7.1.1",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "globals": "^15.9.0",
+    "typescript-eslint": "^8.25.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.21.0",
     "husky": "9.1.7",
     "lint-staged": "^14.0.1",
     "prettier": "3.3.3",
@@ -77,5 +86,23 @@
     "*.(js|jsx|cjs|ts|tsx)": [
       "eslint --cache --max-warnings=0"
     ]
-  }
+  },
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "react",
+    "node",
+    "typescript",
+    "prettier"
+  ],
+  "author": "Jha",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/eslint-config-jha-react-node"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/eslint-config-jha-react-node/issues"
+  },
+  "homepage": "https://github.com/yourusername/eslint-config-jha-react-node#readme"
 }
