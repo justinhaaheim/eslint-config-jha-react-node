@@ -1,4 +1,3 @@
-// @ts-check
 // ESLint Flat Config
 import js from '@eslint/js';
 import restrictedGlobals from 'confusing-browser-globals';
@@ -12,8 +11,6 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import sortKeysFix from 'eslint-plugin-sort-keys-fix';
 import typescriptSortKeys from 'eslint-plugin-typescript-sort-keys';
 import globals from 'globals';
-// import path from 'node:path';
-// import {fileURLToPath} from 'node:url';
 import tseslint from 'typescript-eslint';
 
 // Constants for rule severity
@@ -21,17 +18,11 @@ const OFF = 0;
 const WARN = 1;
 const ERROR = 2;
 
-// Modified to fit TypeScript-ESLint's expected rule format
 const NO_UNUSED_VARS_CONFIG = [
   WARN,
   {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
 ];
 
-// Handle __dirname in ESM
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
-// Base configuration for all files
 export default tseslint.config(
   {ignores: ['**/build/', '**/dist/', '**/node_modules/']},
 
@@ -39,6 +30,9 @@ export default tseslint.config(
   js.configs.recommended,
 
   // Apply prettier config (disables rules that conflict with prettier)
+  // Note that we may want to periodically run the prettier cli tool to check
+  // for any rules we are setting below that conflict with prettier.
+  // See: https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#cli-helper-tool
   eslintConfigPrettier,
 
   // Base configuration for all JS/TS files
@@ -67,9 +61,7 @@ export default tseslint.config(
     },
 
     rules: {
-      // General rules
       'import/first': ERROR,
-      // Disable this rule as it requires additional configuration for TypeScript
       // Additional import rules from eslint-config-react-app
       'import/no-amd': ERROR,
 
@@ -81,11 +73,11 @@ export default tseslint.config(
       'import/no-unresolved': OFF, // From eslint-config-react-app
       'import/no-webpack-loader-syntax': ERROR, // From eslint-config-react-app
 
-      // JSX A11y rules - you have some of these already
+      // JSX A11y rules
       'jsx-a11y/alt-text': ERROR, // eslint-config-react-app uses WARN
       'jsx-a11y/anchor-has-content': ERROR, // eslint-config-react-app uses WARN
-      'jsx-a11y/anchor-is-valid': ERROR,
-      // eslint-config-react-app uses WARN
+      'jsx-a11y/anchor-is-valid': ERROR, // eslint-config-react-app uses WARN
+
       // Additional JSX A11y rules from eslint-config-react-app
       'jsx-a11y/aria-activedescendant-has-tabindex': WARN,
 
@@ -199,7 +191,7 @@ export default tseslint.config(
     },
   },
 
-  // TypeScript specific config with type checking (applies only to .ts/.tsx files)
+  // TypeScript specific config with type checking
   {
     extends: [
       tseslint.configs.recommendedTypeChecked,
@@ -240,7 +232,6 @@ export default tseslint.config(
     },
 
     rules: {
-      // Your existing TypeScript rules
       '@typescript-eslint/ban-ts-comment': [
         WARN,
         {
@@ -248,7 +239,6 @@ export default tseslint.config(
         },
       ],
 
-      // TypeScript rules from eslint-config-react-app
       '@typescript-eslint/consistent-type-assertions': WARN,
 
       '@typescript-eslint/consistent-type-definitions': OFF,
@@ -268,6 +258,8 @@ export default tseslint.config(
       // From eslint-config-react-app
       '@typescript-eslint/no-redeclare': WARN,
 
+      '@typescript-eslint/no-require-imports': WARN,
+
       // From eslint-config-react-app
       '@typescript-eslint/no-unused-expressions': [
         // From eslint-config-react-app
@@ -279,7 +271,6 @@ export default tseslint.config(
         },
       ],
 
-      // Modified to match TypeScript-ESLint's expected format
       '@typescript-eslint/no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
       // From eslint-config-react-app
@@ -293,9 +284,6 @@ export default tseslint.config(
           variables: false,
         },
       ],
-
-      // eslint-config-react-app uses different config
-      '@typescript-eslint/no-var-requires': WARN,
 
       '@typescript-eslint/return-await': [ERROR, 'always'],
 
@@ -313,6 +301,7 @@ export default tseslint.config(
       'no-unused-vars': OFF,
       // From eslint-config-react-app
       'no-use-before-define': OFF,
+
       'typescript-sort-keys/interface': WARN,
       'typescript-sort-keys/string-enum': WARN,
     },
@@ -354,12 +343,11 @@ export default tseslint.config(
 
       'react/jsx-pascal-case': ERROR,
 
-      // eslint-config-react-app uses WARN with allowAllCaps: true, ignore: []
       'react/jsx-sort-props': WARN,
 
       'react/no-array-index-key': WARN,
 
-      'react/no-danger': ERROR,
+      'react/no-danger': WARN,
 
       // From eslint-config-react-app
       'react/no-danger-with-children': WARN,
@@ -367,7 +355,7 @@ export default tseslint.config(
       'react/no-deprecated': ERROR,
 
       // From eslint-config-react-app
-      'react/no-direct-mutation-state': WARN,
+      'react/no-direct-mutation-state': ERROR,
 
       // From eslint-config-react-app
       'react/no-is-mounted': WARN,
@@ -375,15 +363,11 @@ export default tseslint.config(
       // From eslint-config-react-app
       'react/no-typos': ERROR,
 
-      // eslint-config-react-app has this commented out due to issues
-      'react/no-unescaped-entities': ERROR,
-
-      'react/prop-types': OFF,
-
       // From eslint-config-react-app
       'react/require-render-return': ERROR,
-      // We use TypeScript instead
+
       'react/self-closing-comp': ERROR, // From eslint-config-react-app
+
       'react/style-prop-object': WARN, // From eslint-config-react-app
     },
   },
