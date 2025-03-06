@@ -231,6 +231,9 @@ export default tseslint.config(
       'typescript-sort-keys': typescriptSortKeys,
     },
 
+    /* eslint-disable sort-keys-fix/sort-keys-fix */
+    // Let's avoid sorting these so we can keep together rule pairs that disable
+    // the js version in favor of the typescript-eslint version
     rules: {
       '@typescript-eslint/ban-ts-comment': [
         WARN,
@@ -249,6 +252,7 @@ export default tseslint.config(
       ],
 
       // From eslint-config-react-app
+      'no-array-constructor': OFF,
       '@typescript-eslint/no-array-constructor': WARN,
 
       '@typescript-eslint/no-inferrable-types': WARN,
@@ -256,11 +260,13 @@ export default tseslint.config(
       '@typescript-eslint/no-non-null-assertion': WARN,
 
       // From eslint-config-react-app
+      'no-redeclare': OFF,
       '@typescript-eslint/no-redeclare': WARN,
 
       '@typescript-eslint/no-require-imports': WARN,
 
       // From eslint-config-react-app
+      'no-unused-expressions': OFF,
       '@typescript-eslint/no-unused-expressions': [
         // From eslint-config-react-app
         ERROR,
@@ -271,9 +277,11 @@ export default tseslint.config(
         },
       ],
 
+      'no-unused-vars': OFF,
       '@typescript-eslint/no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
       // From eslint-config-react-app
+      'no-use-before-define': OFF,
       '@typescript-eslint/no-use-before-define': [
         // From eslint-config-react-app
         WARN,
@@ -285,26 +293,15 @@ export default tseslint.config(
         },
       ],
 
-      '@typescript-eslint/return-await': [ERROR, 'always'],
-
-      // From eslint-config-react-app
-      'no-array-constructor': OFF,
-
-      // From eslint-config-react-app
-      'no-redeclare': OFF,
-
       // Disable base rule as it can report incorrect errors with TypeScript
       'no-return-await': OFF,
-
-      'no-unused-expressions': OFF,
-
-      'no-unused-vars': OFF,
-      // From eslint-config-react-app
-      'no-use-before-define': OFF,
+      '@typescript-eslint/return-await': [ERROR, 'always'],
 
       'typescript-sort-keys/interface': WARN,
+
       'typescript-sort-keys/string-enum': WARN,
     },
+    /* eslint-enable sort-keys-fix/sort-keys-fix */
   },
 
   // React JSX rules
