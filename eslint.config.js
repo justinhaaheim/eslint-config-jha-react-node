@@ -152,11 +152,13 @@ export default tseslint.config(
         {location: 'anywhere', terms: ['nocommit']},
       ],
 
-      quotes: [
-        ERROR,
-        'single',
-        {allowTemplateLiterals: true, avoidEscape: true},
-      ],
+      // Quotes shouldn't be needed with prettier onboard
+      // See: https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#quotes-deprecated
+      // quotes: [
+      //   ERROR,
+      //   'single',
+      //   {allowTemplateLiterals: true, avoidEscape: true},
+      // ],
 
       // React hooks rules
       'react-hooks/exhaustive-deps': ERROR,
