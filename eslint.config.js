@@ -31,20 +31,18 @@ const NO_UNUSED_VARS_CONFIG = [
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 
-// Base configuration for all finples
+// Base configuration for all files
 export default tseslint.config(
+  {ignores: ['**/build/', '**/dist/', '**/node_modules/']},
+
   // Apply base JS recommended rules
   js.configs.recommended,
-
-  // Apply TypeScript recommended rules
-  ...tseslint.configs.recommended,
 
   // Apply prettier config (disables rules that conflict with prettier)
   eslintConfigPrettier,
 
   // Base configuration for all JS/TS files
   {
-    ignores: ['**/build/', '**/dist/', '**/node_modules/'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
@@ -53,9 +51,11 @@ export default tseslint.config(
       },
       sourceType: 'module',
     },
+
     linterOptions: {
       reportUnusedDisableDirectives: true,
     },
+
     plugins: {
       import: importPlugin,
       'jsx-a11y': jsxA11y,
@@ -190,6 +190,7 @@ export default tseslint.config(
       // Key sorting (not in eslint-config-react-app)
       'sort-keys-fix/sort-keys-fix': WARN,
     },
+
     // Add settings from eslint-config-react-app/base.js
     settings: {
       react: {
@@ -198,9 +199,15 @@ export default tseslint.config(
     },
   },
 
-  // TypeScript specific config (applies only to .ts/.tsx files)
+  // TypeScript specific config with type checking (applies only to .ts/.tsx files)
   {
+    extends: [
+      tseslint.configs.recommendedTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+    ],
+
     files: ['**/*.ts', '**/*.tsx'],
+
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -222,13 +229,16 @@ export default tseslint.config(
 
         // @ts-expect-error No idea why it's saying TS2339: Property 'dirname' does not exist on type 'ImportMeta'.
         tsconfigRootDir: import.meta.dirname,
+
         warnOnUnsupportedTypeScriptVersion: true, // From eslint-config-react-app
       },
     },
+
     plugins: {
       '@typescript-eslint': tseslint.plugin,
       'typescript-sort-keys': typescriptSortKeys,
     },
+
     rules: {
       // Your existing TypeScript rules
       '@typescript-eslint/ban-ts-comment': [
@@ -240,6 +250,8 @@ export default tseslint.config(
 
       // TypeScript rules from eslint-config-react-app
       '@typescript-eslint/consistent-type-assertions': WARN,
+
+      '@typescript-eslint/consistent-type-definitions': OFF,
 
       '@typescript-eslint/consistent-type-imports': [
         WARN,

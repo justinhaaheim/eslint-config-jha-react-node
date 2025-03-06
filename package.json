@@ -1,8 +1,8 @@
 {
   "name": "eslint-config-jha-react-node",
   "private": false,
-  "version": "0.0.1",
-  "description": "A comprehensive ESLint configuration for React and Node.js projects with TypeScript support",
+  "version": "0.1.0",
+  "description": "A high quality ESLint configuration for the discerning typescript aesthete. Rules for react and node.",
   "type": "module",
   "main": "eslint.config.js",
   "files": [
@@ -84,10 +84,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/eslint-config-jha-react-node"
+    "url": "https://github.com/justinhaaheim/eslint-config-jha-react-node"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/eslint-config-jha-react-node/issues"
+    "url": "https://github.com/justinhaaheim/eslint-config-jha-react-node/issues"
   },
-  "homepage": "https://github.com/yourusername/eslint-config-jha-react-node#readme"
+  "homepage": "https://github.com/justinhaaheim/eslint-config-jha-react-node#readme"
 }
