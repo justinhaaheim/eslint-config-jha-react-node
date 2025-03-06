@@ -23,6 +23,11 @@ const NO_UNUSED_VARS_CONFIG = [
   {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
 ];
 
+const NO_UNUSED_EXPRESSIONS_CONFIG = [
+  ERROR,
+  {allowShortCircuit: true, allowTaggedTemplates: true, allowTernary: true},
+];
+
 export default tseslint.config(
   {ignores: ['**/build/', '**/dist/', '**/node_modules/']},
 
@@ -130,10 +135,15 @@ export default tseslint.config(
       // Add restricted globals from eslint-config-react-app
       'no-restricted-globals': [ERROR, ...restrictedGlobals],
 
-      'no-unused-expressions': ERROR,
+      'no-shadow': ERROR,
+
+      // @ts-expect-error No idea why this is complaining that this doesn't match RuleLevelAndOptions
+      'no-unused-expressions': NO_UNUSED_EXPRESSIONS_CONFIG,
 
       // @ts-expect-error No idea why this is complaining
       'no-unused-vars': NO_UNUSED_VARS_CONFIG,
+
+      'no-use-before-define': ERROR,
 
       'no-var': ERROR,
 
@@ -267,29 +277,17 @@ export default tseslint.config(
 
       // From eslint-config-react-app
       'no-unused-expressions': OFF,
-      '@typescript-eslint/no-unused-expressions': [
-        // From eslint-config-react-app
-        ERROR,
-        {
-          allowShortCircuit: true,
-          allowTaggedTemplates: true,
-          allowTernary: true,
-        },
-      ],
+      '@typescript-eslint/no-unused-expressions': NO_UNUSED_EXPRESSIONS_CONFIG,
 
       'no-unused-vars': OFF,
       '@typescript-eslint/no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
-      // From eslint-config-react-app
       'no-use-before-define': OFF,
       '@typescript-eslint/no-use-before-define': [
         // From eslint-config-react-app
-        WARN,
+        ERROR,
         {
-          classes: false,
-          functions: false,
           typedefs: false,
-          variables: false,
         },
       ],
 
@@ -300,6 +298,9 @@ export default tseslint.config(
       'typescript-sort-keys/interface': WARN,
 
       'typescript-sort-keys/string-enum': WARN,
+
+      'no-shadow': OFF,
+      '@typescript-eslint/no-shadow': ERROR, // or whatever severity you prefer
     },
     /* eslint-enable sort-keys-fix/sort-keys-fix */
   },
