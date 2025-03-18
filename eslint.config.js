@@ -1,17 +1,18 @@
 // ESLint Flat Config
-import js from '@eslint/js';
-import restrictedGlobals from 'confusing-browser-globals';
-import eslintConfigPrettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
-import reactPlugin from 'eslint-plugin-react';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import sortKeysFix from 'eslint-plugin-sort-keys-fix';
-import typescriptSortKeys from 'eslint-plugin-typescript-sort-keys';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
+const js = require('@eslint/js');
+const restrictedGlobals = require('confusing-browser-globals');
+const eslintConfigPrettier = require('eslint-config-prettier');
+const importPlugin = require('eslint-plugin-import');
+const jsxA11y = require('eslint-plugin-jsx-a11y');
+const reactPlugin = require('eslint-plugin-react');
+const reactHooks = require('eslint-plugin-react-hooks');
+const reactRefresh = require('eslint-plugin-react-refresh');
+const simpleImportSort = require('eslint-plugin-simple-import-sort');
+const sortKeysFix = require('eslint-plugin-sort-keys-fix');
+const typescriptSortKeys = require('eslint-plugin-typescript-sort-keys');
+const globals = require('globals');
+const tseslint = require('typescript-eslint');
+const path = require('path');
 
 // Constants for rule severity
 const OFF = 0;
@@ -28,7 +29,7 @@ const NO_UNUSED_EXPRESSIONS_CONFIG = [
   {allowShortCircuit: true, allowTaggedTemplates: true, allowTernary: true},
 ];
 
-export default tseslint.config(
+module.exports = tseslint.config(
   {ignores: ['**/build/', '**/dist/', '**/node_modules/']},
 
   // Apply base JS recommended rules
@@ -231,8 +232,8 @@ export default tseslint.config(
 
         sourceType: 'module',
 
-        // @ts-expect-error No idea why it's saying TS2339: Property 'dirname' does not exist on type 'ImportMeta'.
-        tsconfigRootDir: import.meta.dirname,
+        // Replace import.meta.dirname with path.dirname(__dirname)
+        tsconfigRootDir: __dirname,
 
         warnOnUnsupportedTypeScriptVersion: true, // From eslint-config-react-app
       },
