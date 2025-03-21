@@ -12,6 +12,7 @@ My eslint flat config for React and Node.js projects with Typescript.
 - Modern JavaScript features (ES2020)
 - Strict type checking
 - Sensible defaults for React development
+- Dual ESM/CJS support - works in both module systems
 
 ## Installation
 
@@ -26,14 +27,58 @@ yarn add --dev eslint-config-jha-react-node
 pnpm add --save-dev eslint-config-jha-react-node
 ```
 
+### Handling Peer Dependency Conflicts
+
+If you're using ESLint 9, you may encounter peer dependency warnings or errors when installing this package. This is because some dependencies haven't yet updated their peer dependency requirements for ESLint 9.
+
+To resolve these conflicts, you can:
+
+1. Use the `--legacy-peer-deps` flag when installing:
+
+   ```bash
+   npm install --save-dev eslint-config-jha-react-node --legacy-peer-deps
+   ```
+
+2. For Yarn users, add resolutions to your package.json:
+
+   ```json
+   "resolutions": {
+     "eslint-plugin-typescript-sort-keys/eslint": "^9.0.0",
+     "@typescript-eslint/utils/eslint": "^9.0.0"
+   }
+   ```
+
+3. For pnpm users, use overrides:
+   ```json
+   "pnpm": {
+     "overrides": {
+       "eslint-plugin-typescript-sort-keys@3.3.0": {
+         "eslint": "^9.0.0"
+       }
+     }
+   }
+   ```
+
+Note that despite these warnings, the package works correctly with ESLint 9.
+
 ## Usage
 
 This package uses ESLint's new flat config format. Create an `eslint.config.js` file in your project root:
+
+### ESM Projects
 
 ```javascript
 import jhaConfig from 'eslint-config-jha-react-node';
 
 export default jhaConfig;
+```
+
+### CommonJS Projects
+
+```javascript
+const jhaConfig = require('eslint-config-jha-react-node');
+
+module.exports = jhaConfig;
 ```
 
 ### Customizing the Configuration
@@ -61,6 +106,36 @@ MIT
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Development
+
+This package supports both ESM and CommonJS. The source code is written in ESM but is pre-built for both module systems.
+
+### Build Process
+
+The project uses Rollup to build both ESM and CommonJS versions:
+
+```bash
+# Build the project
+npm run build
+```
+
+This creates:
+
+- `dist/esm/index.js` - ESM module
+- `dist/cjs/index.cjs` - CommonJS module
+
+The built files are committed to the repository so that they are immediately available when installing directly from GitHub.
+
+### Contributing
+
+When contributing, please run the build process before submitting a pull request:
+
+```bash
+npm run precommit
+```
+
+This will lint the code and rebuild the dist files, which should be committed along with your changes.
 
 ## ESLint Testing
 

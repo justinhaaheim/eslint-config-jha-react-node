@@ -25,3 +25,14 @@ jobs:
 
       - name: Build the project
         run: npm run build
+
+      - name: Check for uncommitted build changes
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Error: Build produced uncommitted changes. Please run 'npm run build' locally and commit the changes."
+            git status
+            git diff
+            exit 1
+          else
+            echo "✅ No uncommitted changes detected after build"
+          fi
