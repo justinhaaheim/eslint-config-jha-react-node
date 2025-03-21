@@ -73,6 +73,36 @@ MIT
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+## Development
+
+This package supports both ESM and CommonJS. The source code is written in ESM but is pre-built for both module systems.
+
+### Build Process
+
+The project uses Rollup to build both ESM and CommonJS versions:
+
+```bash
+# Build the project
+npm run build
+```
+
+This creates:
+
+- `dist/esm/index.js` - ESM module
+- `dist/cjs/index.cjs` - CommonJS module
+
+The built files are committed to the repository so that they are immediately available when installing directly from GitHub.
+
+### Contributing
+
+When contributing, please run the build process before submitting a pull request:
+
+```bash
+npm run precommit
+```
+
+This will lint the code and rebuild the dist files, which should be committed along with your changes.
+
 ## ESLint Testing
 
 The project includes a test file to verify that the ESLint configuration is working correctly. The test file contains intentional ESLint violations with corresponding eslint-disable directives.

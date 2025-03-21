@@ -33,7 +33,8 @@
     "ts-check": "tsc --build",
     "prepare": "husky",
     "build": "npm run clean:build && rollup -c",
-    "prepublishOnly": "npm run build"
+    "precommit": "npm run lint && npm run build",
+    "prepublishOnly": "npm run lint && npm run build"
   },
   "peerDependencies": {
     "eslint": ">= 9"
@@ -80,8 +81,8 @@
   },
   "lint-staged": {
     "**/*": "prettier --check --ignore-unknown",
-    "*.(js|jsx|cjs|ts|tsx)": [
-      "eslint --cache --max-warnings=0"
+    "*.(js|jsx|cjs|mjs|ts|tsx)": [
+      "eslint --cache --max-warnings=0 --no-warn-ignored"
     ]
   },
   "keywords": [
