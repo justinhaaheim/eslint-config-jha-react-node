@@ -12,6 +12,7 @@ My eslint flat config for React and Node.js projects with Typescript.
 - Modern JavaScript features (ES2020)
 - Strict type checking
 - Sensible defaults for React development
+- Dual ESM/CJS support - works in both module systems
 
 ## Installation
 
@@ -30,10 +31,20 @@ pnpm add --save-dev eslint-config-jha-react-node
 
 This package uses ESLint's new flat config format. Create an `eslint.config.js` file in your project root:
 
+### ESM Projects
+
 ```javascript
 import jhaConfig from 'eslint-config-jha-react-node';
 
 export default jhaConfig;
+```
+
+### CommonJS Projects
+
+```javascript
+const jhaConfig = require('eslint-config-jha-react-node');
+
+module.exports = jhaConfig;
 ```
 
 ### Customizing the Configuration

@@ -4,9 +4,16 @@
   "version": "0.1.0",
   "description": "A high quality ESLint configuration for the discerning typescript aesthete. Rules for react and node.",
   "type": "module",
-  "main": "eslint.config.js",
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.cjs"
+    }
+  },
   "files": [
-    "eslint.config.js",
+    "dist/",
     "README.md"
   ],
   "engines": {
@@ -14,7 +21,7 @@
     "node": ">=21.2.x"
   },
   "scripts": {
-    "clean:build": "rm -rf build/",
+    "clean:build": "rm -rf dist/",
     "clean:node-modules": "rm -rf node_modules/",
     "lint:fix": "npm run lint -- --fix",
     "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
@@ -24,7 +31,9 @@
     "signal:serial": "npm run ts-check && npm run lint && npm run prettier-check",
     "signal": "concurrently --names \"TS,LINT,PRETTIER\" -c \"bgBlack.bold,bgRed.bold,bgCyan.bold\" \"npm run ts-check\" \"npm run lint\" \"npm run prettier-check\"",
     "ts-check": "tsc --build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "npm run clean:build && rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "eslint": ">= 9"
@@ -35,9 +44,9 @@
     "eslint-config-prettier": "10.0.2",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "7.37.4",
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.19",
-    "eslint-plugin-react": "7.37.4",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "eslint-plugin-sort-keys-fix": "1.1.2",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
@@ -45,6 +54,8 @@
     "typescript-eslint": "^8.25.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.1",
     "@types/confusing-browser-globals": "^1.0.3",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint-plugin-jsx-a11y": "^6.10.0",
@@ -53,6 +64,7 @@
     "husky": "9.1.7",
     "lint-staged": "^14.0.1",
     "prettier": "3.3.3",
+    "rollup": "^4.36.0",
     "typescript": "^5.5.3"
   },
   "overrides": {
