@@ -40,6 +40,18 @@ export default tseslint.config(
   // See: https://github.com/prettier/eslint-config-prettier?tab=readme-ov-file#cli-helper-tool
   eslintConfigPrettier,
 
+  // CommonJS files configuration
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.commonjs,
+      },
+      sourceType: 'commonjs',
+    },
+  },
+
   // Base configuration for all JS/TS files
   {
     languageOptions: {
