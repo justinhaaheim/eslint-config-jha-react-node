@@ -27,6 +27,40 @@ yarn add --dev eslint-config-jha-react-node
 pnpm add --save-dev eslint-config-jha-react-node
 ```
 
+### Handling Peer Dependency Conflicts
+
+If you're using ESLint 9, you may encounter peer dependency warnings or errors when installing this package. This is because some dependencies haven't yet updated their peer dependency requirements for ESLint 9.
+
+To resolve these conflicts, you can:
+
+1. Use the `--legacy-peer-deps` flag when installing:
+
+   ```bash
+   npm install --save-dev eslint-config-jha-react-node --legacy-peer-deps
+   ```
+
+2. For Yarn users, add resolutions to your package.json:
+
+   ```json
+   "resolutions": {
+     "eslint-plugin-typescript-sort-keys/eslint": "^9.0.0",
+     "@typescript-eslint/utils/eslint": "^9.0.0"
+   }
+   ```
+
+3. For pnpm users, use overrides:
+   ```json
+   "pnpm": {
+     "overrides": {
+       "eslint-plugin-typescript-sort-keys@3.3.0": {
+         "eslint": "^9.0.0"
+       }
+     }
+   }
+   ```
+
+Note that despite these warnings, the package works correctly with ESLint 9.
+
 ## Usage
 
 This package uses ESLint's new flat config format. Create an `eslint.config.js` file in your project root:
