@@ -275,6 +275,11 @@ export default tseslint.config(
         {prefer: 'type-imports'},
       ],
 
+      '@typescript-eslint/prefer-nullish-coalescing': [
+        WARN,
+        {ignoreIfStatements: true},
+      ],
+
       // From eslint-config-react-app
       'no-array-constructor': OFF,
       '@typescript-eslint/no-array-constructor': WARN,
