@@ -30,7 +30,7 @@
     "prettier": "prettier --write .",
     "signal:serial": "npm run ts-check && npm run lint && npm run prettier-check",
     "signal": "concurrently --names \"TS,LINT,PRETTIER\" -c \"bgBlack.bold,bgRed.bold,bgCyan.bold\" \"npm run ts-check\" \"npm run lint\" \"npm run prettier-check\"",
-    "ts-check": "tsc --build",
+    "ts-check": "tsc --noEmit",
     "prepare": "husky",
     "build": "npm run clean:build && rollup -c",
     "prepublishOnly": "npm run lint && npm run build"
