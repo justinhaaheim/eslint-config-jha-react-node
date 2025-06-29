@@ -48,10 +48,10 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-react-refresh": "0.4.19",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "eslint-plugin-sort-keys-fix": "1.1.2",
+    "eslint-plugin-sort-keys": "github:justinhaaheim/eslint-plugin-sort-keys",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "globals": "^15.9.0",
-    "typescript-eslint": "^8.25.0"
+    "typescript-eslint": "8.35.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",

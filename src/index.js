@@ -1,4 +1,4 @@
-// ESLint Flat Config
+/* eslint-disable sort-keys/sort-keys-fix */
 import js from '@eslint/js';
 import restrictedGlobals from 'confusing-browser-globals';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -8,7 +8,8 @@ import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import sortKeysFix from 'eslint-plugin-sort-keys-fix';
+// @ts-expect-error No typescript types for this plugin currently
+import sortKeys from 'eslint-plugin-sort-keys';
 import typescriptSortKeys from 'eslint-plugin-typescript-sort-keys';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -75,7 +76,7 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSort,
-      'sort-keys-fix': sortKeysFix,
+      'sort-keys': sortKeys,
     },
 
     rules: {
@@ -204,8 +205,10 @@ export default tseslint.config(
         },
       ],
 
-      // Key sorting (not in eslint-config-react-app)
-      'sort-keys-fix/sort-keys-fix': WARN,
+      // Disable the default sort-keys rule so we can use our fixable rule
+      'sort-keys': OFF,
+
+      'sort-keys/sort-keys-fix': WARN,
     },
 
     // Add settings from eslint-config-react-app/base.js
@@ -256,7 +259,6 @@ export default tseslint.config(
       'typescript-sort-keys': typescriptSortKeys,
     },
 
-    /* eslint-disable sort-keys-fix/sort-keys-fix */
     // Let's avoid sorting these so we can keep together rule pairs that disable
     // the js version in favor of the typescript-eslint version
     rules: {
@@ -276,33 +278,20 @@ export default tseslint.config(
         {prefer: 'type-imports'},
       ],
 
-      '@typescript-eslint/prefer-nullish-coalescing': [
-        WARN,
-        {ignoreIfStatements: true},
-      ],
-
-      // From eslint-config-react-app
-      'no-array-constructor': OFF,
       '@typescript-eslint/no-array-constructor': WARN,
 
       '@typescript-eslint/no-inferrable-types': WARN,
 
       '@typescript-eslint/no-non-null-assertion': WARN,
 
-      // From eslint-config-react-app
-      'no-redeclare': OFF,
       '@typescript-eslint/no-redeclare': WARN,
 
       '@typescript-eslint/no-require-imports': WARN,
 
-      // From eslint-config-react-app
-      'no-unused-expressions': OFF,
       '@typescript-eslint/no-unused-expressions': NO_UNUSED_EXPRESSIONS_CONFIG,
 
-      'no-unused-vars': OFF,
       '@typescript-eslint/no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
-      'no-use-before-define': OFF,
       '@typescript-eslint/no-use-before-define': [
         // From eslint-config-react-app
         ERROR,
@@ -311,18 +300,36 @@ export default tseslint.config(
         },
       ],
 
-      // Disable base rule as it can report incorrect errors with TypeScript
-      'no-return-await': OFF,
+      '@typescript-eslint/prefer-nullish-coalescing': [
+        WARN,
+        {ignoreIfStatements: true},
+      ],
+
       '@typescript-eslint/return-await': [ERROR, 'always'],
 
-      'typescript-sort-keys/interface': WARN,
+      // From eslint-config-react-app
+      'no-array-constructor': OFF,
 
-      'typescript-sort-keys/string-enum': WARN,
+      '@typescript-eslint/no-shadow': ERROR,
+
+      // From eslint-config-react-app
+      'no-redeclare': OFF,
+
+      // Disable base rule as it can report incorrect errors with TypeScript
+      'no-return-await': OFF,
 
       'no-shadow': OFF,
-      '@typescript-eslint/no-shadow': ERROR, // or whatever severity you prefer
+
+      // From eslint-config-react-app
+      'no-unused-expressions': OFF,
+
+      'no-unused-vars': OFF,
+
+      'no-use-before-define': OFF,
+
+      'typescript-sort-keys/interface': WARN,
+      'typescript-sort-keys/string-enum': WARN, // or whatever severity you prefer
     },
-    /* eslint-enable sort-keys-fix/sort-keys-fix */
   },
 
   // React JSX rules

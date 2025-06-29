@@ -83,12 +83,17 @@ export {isObject};
 
 // ==================== Sort Keys Rules ====================
 
-/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable sort-keys/sort-keys-fix */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const unsortedObject = {
+  // This should be unsorted:
+  // zebra: 1,
+  // alpha: 2,
+  // beta: 3,
+  // gamma: 4,
   zebra: 1,
   alpha: 2,
   beta: 3,
   gamma: 4,
 };
-/* eslint-enable sort-keys-fix/sort-keys-fix */
+/* eslint-enable sort-keys/sort-keys-fix */
