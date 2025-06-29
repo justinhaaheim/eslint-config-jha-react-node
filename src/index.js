@@ -64,7 +64,8 @@ export default tseslint.config(
     },
 
     linterOptions: {
-      reportUnusedDisableDirectives: true,
+      // We need to disable this here because otherwise it's impossible to prevent the linter from auto-fixing and removing the disable directives, even when we want to keep them.
+      reportUnusedDisableDirectives: 0,
     },
 
     plugins: {
