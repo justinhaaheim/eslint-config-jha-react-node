@@ -11,7 +11,7 @@ declare module 'eslint-plugin-import' {
   export default plugin;
 }
 
-declare module 'eslint-plugin-sort-keys-fix' {
+declare module 'eslint-plugin-sort-keys' {
   import type {ESLint} from 'eslint';
   const plugin: ESLint.Plugin;
   export default plugin;
