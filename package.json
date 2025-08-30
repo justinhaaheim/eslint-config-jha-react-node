@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-jha-react-node",
   "private": false,
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A high quality ESLint configuration for the discerning typescript aesthete. Rules for react and node.",
   "type": "module",
   "main": "./dist/cjs/index.cjs",
