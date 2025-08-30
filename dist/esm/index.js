@@ -645,6 +645,19 @@ var index = tseslint.config(
 
       '@typescript-eslint/no-unused-vars': NO_UNUSED_VARS_CONFIG,
 
+      '@typescript-eslint/strict-boolean-expressions': [
+        'error',
+        {
+          allowString: false, // Disallow strings in boolean context
+          allowNumber: false, // Disallow numbers in boolean context
+          allowNullableObject: false, // Disallow nullable objects in boolean context
+          allowNullableBoolean: false, // Disallow nullable booleans without explicit check
+          allowNullableString: false, // Disallow nullable strings without explicit check
+          allowNullableNumber: false, // Disallow nullable numbers without explicit check
+          allowAny: false, // Disallow 'any' type in boolean context
+        },
+      ],
+
       '@typescript-eslint/no-use-before-define': [
         // From eslint-config-react-app
         ERROR,
