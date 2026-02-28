@@ -1,32 +1,25 @@
-'use strict';
-
-var globals = require('globals');
-var js = require('@eslint/js');
-var restrictedGlobals = require('confusing-browser-globals');
-var eslintConfigPrettier = require('eslint-config-prettier');
-var importPlugin = require('eslint-plugin-import');
-var simpleImportSort = require('eslint-plugin-simple-import-sort');
-var sortKeys = require('eslint-plugin-sort-keys');
-var typescriptSortKeys = require('eslint-plugin-typescript-sort-keys');
-var tseslint = require('typescript-eslint');
-var jsxA11y = require('eslint-plugin-jsx-a11y');
-var reactPlugin = require('eslint-plugin-react');
-var reactHooks = require('eslint-plugin-react-hooks');
-var reactRefresh = require('eslint-plugin-react-refresh');
-
 /* eslint-disable sort-keys/sort-keys-fix */
+import js from '@eslint/js';
+import restrictedGlobals from 'confusing-browser-globals';
+import eslintConfigPrettier from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import sortKeys from 'eslint-plugin-sort-keys';
+import typescriptSortKeys from 'eslint-plugin-typescript-sort-keys';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 // Constants for rule severity
-const OFF = 0;
-const WARN = 1;
-const ERROR = 2;
+export const OFF = 0;
+export const WARN = 1;
+export const ERROR = 2;
 
-const NO_UNUSED_VARS_CONFIG = [
+export const NO_UNUSED_VARS_CONFIG = [
   WARN,
   {argsIgnorePattern: '^_', varsIgnorePattern: '^_'},
 ];
 
-const NO_UNUSED_EXPRESSIONS_CONFIG = [
+export const NO_UNUSED_EXPRESSIONS_CONFIG = [
   ERROR,
   {allowShortCircuit: true, allowTaggedTemplates: true, allowTernary: true},
 ];
@@ -39,7 +32,7 @@ const NO_UNUSED_EXPRESSIONS_CONFIG = [
  * @param {Record<string, boolean>} environmentGlobals - The globals to include (e.g., globals.browser or globals.node)
  * @returns {import('typescript-eslint').ConfigArray}
  */
-function createBaseConfig(environmentGlobals) {
+export function createBaseConfig(environmentGlobals) {
   return tseslint.config(
     {ignores: ['**/build/', '**/dist/', '**/node_modules/']},
 
@@ -184,7 +177,7 @@ function createBaseConfig(environmentGlobals) {
           sourceType: 'module',
 
           // @ts-expect-error No idea why it's saying TS2339: Property 'dirname' does not exist on type 'ImportMeta'.
-          tsconfigRootDir: undefined,
+          tsconfigRootDir: import.meta.dirname,
 
           warnOnUnsupportedTypeScriptVersion: true, // From eslint-config-react-app
         },
@@ -283,163 +276,3 @@ function createBaseConfig(environmentGlobals) {
     },
   );
 }
-
-var base = createBaseConfig({...globals.browser, ...globals.es2020});
-
-var react = tseslint.config(
-  // React plugins and rules that apply to all files
-  {
-    plugins: {
-      'jsx-a11y': jsxA11y,
-      react: reactPlugin,
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
-
-    rules: {
-      // JSX A11y rules
-      'jsx-a11y/alt-text': ERROR, // eslint-config-react-app uses WARN
-      'jsx-a11y/anchor-has-content': ERROR, // eslint-config-react-app uses WARN
-      'jsx-a11y/anchor-is-valid': ERROR, // eslint-config-react-app uses WARN
-
-      // Additional JSX A11y rules from eslint-config-react-app
-      'jsx-a11y/aria-activedescendant-has-tabindex': WARN,
-
-      // eslint-config-react-app uses WARN with aspects: ['noHref', 'invalidHref']
-      'jsx-a11y/aria-props': ERROR,
-
-      // From eslint-config-react-app
-      'jsx-a11y/aria-proptypes': WARN,
-
-      // eslint-config-react-app uses WARN
-      'jsx-a11y/aria-role': ERROR,
-
-      // From eslint-config-react-app
-      'jsx-a11y/aria-unsupported-elements': WARN,
-
-      // eslint-config-react-app uses WARN with ignoreNonDOM: true
-      'jsx-a11y/click-events-have-key-events': WARN,
-
-      // From eslint-config-react-app
-      'jsx-a11y/heading-has-content': WARN,
-
-      // From eslint-config-react-app
-      'jsx-a11y/iframe-has-title': WARN,
-
-      'jsx-a11y/img-redundant-alt': ERROR,
-
-      // From eslint-config-react-app
-      'jsx-a11y/no-access-key': WARN,
-
-      // From eslint-config-react-app
-      'jsx-a11y/no-distracting-elements': WARN,
-
-      // eslint-config-react-app uses WARN
-      'jsx-a11y/no-noninteractive-element-interactions': WARN,
-
-      // From eslint-config-react-app
-      'jsx-a11y/no-redundant-roles': WARN,
-
-      'jsx-a11y/no-static-element-interactions': WARN,
-      'jsx-a11y/role-has-required-aria-props': ERROR, // From eslint-config-react-app
-      'jsx-a11y/role-supports-aria-props': WARN, // From eslint-config-react-app
-      'jsx-a11y/scope': WARN,
-
-      // React hooks rules
-      'react-hooks/exhaustive-deps': ERROR,
-
-      // eslint-config-react-app uses WARN
-      'react-hooks/rules-of-hooks': ERROR,
-
-      // eslint-config-react-app also uses ERROR
-      // React refresh rule (not in eslint-config-react-app)
-      'react-refresh/only-export-components': [
-        WARN,
-        {allowConstantExport: true},
-      ],
-
-      // From eslint-config-react-app/base.js
-      'react/jsx-uses-react': WARN,
-
-      // From eslint-config-react-app
-      // React rules from eslint-config-react-app/base.js
-      'react/jsx-uses-vars': WARN,
-    },
-
-    // Add settings from eslint-config-react-app/base.js
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-  },
-
-  // React JSX rules
-  {
-    files: ['**/*.jsx', '**/*.tsx'],
-    plugins: {
-      react: reactPlugin,
-    },
-    rules: {
-      // Additional React rules from eslint-config-react-app
-      'react/forbid-foreign-prop-types': [WARN, {allowInPropTypes: true}],
-
-      // Your existing React rules
-      'react/jsx-boolean-value': [ERROR, 'never'],
-
-      'react/jsx-curly-brace-presence': [
-        ERROR,
-        {children: 'never', props: 'never'},
-      ],
-
-      'react/jsx-fragments': [ERROR, 'syntax'],
-
-      // From eslint-config-react-app
-      'react/jsx-no-comment-textnodes': WARN,
-
-      // From eslint-config-react-app
-      'react/jsx-no-duplicate-props': WARN,
-
-      // From eslint-config-react-app
-      'react/jsx-no-target-blank': WARN,
-
-      // From eslint-config-react-app
-      'react/jsx-no-undef': ERROR,
-
-      'react/jsx-no-useless-fragment': ERROR,
-
-      'react/jsx-pascal-case': ERROR,
-
-      'react/jsx-sort-props': WARN,
-
-      'react/no-array-index-key': WARN,
-
-      'react/no-danger': WARN,
-
-      // From eslint-config-react-app
-      'react/no-danger-with-children': WARN,
-
-      'react/no-deprecated': ERROR,
-
-      // From eslint-config-react-app
-      'react/no-direct-mutation-state': ERROR,
-
-      // From eslint-config-react-app
-      'react/no-is-mounted': WARN,
-
-      // From eslint-config-react-app
-      'react/no-typos': ERROR,
-
-      // From eslint-config-react-app
-      'react/require-render-return': ERROR,
-
-      'react/self-closing-comp': ERROR, // From eslint-config-react-app
-
-      'react/style-prop-object': WARN, // From eslint-config-react-app
-    },
-  },
-);
-
-var index = [...base, ...react];
-
-module.exports = index;

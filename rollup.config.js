@@ -11,33 +11,43 @@ const external = [
   'eslint-plugin-react-hooks',
   'eslint-plugin-react-refresh',
   'eslint-plugin-simple-import-sort',
-  'eslint-plugin-sort-keys-fix',
+  'eslint-plugin-sort-keys',
   'eslint-plugin-typescript-sort-keys',
   'globals',
   'typescript-eslint',
 ];
 
+const plugins = [nodeResolve(), commonjs()];
+
+/** @param {string} name */
+function buildEntry(name) {
+  return [
+    {
+      external,
+      input: `src/${name}.js`,
+      output: {
+        exports: 'default',
+        file: `dist/esm/${name}.js`,
+        format: 'esm',
+      },
+      plugins,
+    },
+    {
+      external,
+      input: `src/${name}.js`,
+      output: {
+        exports: 'default',
+        file: `dist/cjs/${name}.cjs`,
+        format: 'cjs',
+      },
+      plugins,
+    },
+  ];
+}
+
 export default [
-  // ESM build
-  {
-    external,
-    input: 'src/index.js',
-    output: {
-      exports: 'default',
-      file: 'dist/esm/index.js',
-      format: 'esm',
-    },
-    plugins: [nodeResolve(), commonjs()],
-  },
-  // CJS build
-  {
-    external,
-    input: 'src/index.js',
-    output: {
-      exports: 'default',
-      file: 'dist/cjs/index.cjs',
-      format: 'cjs',
-    },
-    plugins: [nodeResolve(), commonjs()],
-  },
+  ...buildEntry('index'),
+  ...buildEntry('base'),
+  ...buildEntry('node'),
+  ...buildEntry('react'),
 ];

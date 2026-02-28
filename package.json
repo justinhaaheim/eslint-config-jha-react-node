@@ -10,6 +10,18 @@
     ".": {
       "import": "./dist/esm/index.js",
       "require": "./dist/cjs/index.cjs"
+    },
+    "./base": {
+      "import": "./dist/esm/base.js",
+      "require": "./dist/cjs/base.cjs"
+    },
+    "./node": {
+      "import": "./dist/esm/node.js",
+      "require": "./dist/cjs/node.cjs"
+    },
+    "./react": {
+      "import": "./dist/esm/react.js",
+      "require": "./dist/cjs/react.cjs"
     }
   },
   "files": [
