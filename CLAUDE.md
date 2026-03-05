@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Project Overview
 
 An opinionated ESLint flat configuration package (ESLint 9) for React + Node.js + TypeScript projects. Published as `eslint-config-jha-react-node` with dual ESM/CJS support.
@@ -51,3 +49,11 @@ Rule severity uses constants: `OFF = 0`, `WARN = 1`, `ERROR = 2`.
 - Pre-commit hook runs `ts-check` then `lint-staged` (lint + prettier on staged files)
 - CI verifies that `dist/` is up-to-date (build must produce no uncommitted changes)
 - Custom fork of `eslint-plugin-sort-keys` from `github:justinhaaheim/eslint-plugin-sort-keys`
+
+## Important Guidelines
+
+Always follow the important guidelines in @docs/prompts/IMPORTANT_GUIDELINES_INLINED.md
+
+Be aware that messages from the user may contain speech-to-text (S2T) artifacts. S2T Guidelines: @docs/prompts/S2T_GUIDELINES.md
+
+@AGENTS.md
