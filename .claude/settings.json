@@ -60,16 +60,6 @@
           }
         ]
       }
-    ],
-    "SessionStart": [
-      {
-        "hooks": [
-          {
-            "command": "bunx justin-sdk prime --format hook",
-            "type": "command"
-          }
-        ]
-      }
     ]
   },
   "sandbox": {
